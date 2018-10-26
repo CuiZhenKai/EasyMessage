@@ -1,0 +1,20 @@
+{
+  "name": "easy-message",
+  "version": "1.0.0",
+  "description": "一个简易的社交软件,仿制微博",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "formidable": "^1.0.17",
+    "express-session": "^1.11.3",
+    "gm": "^1.20.0",
+    "mongodb": "^2.0.43"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "13号得分手",
+  "license": "ISC"
+}

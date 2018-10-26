@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/favicon.ico">
+    <title>登陆 - 班级说说</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/jumbotron.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 120px;
+        }
+        #cuowukuang{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+        <% include header.ejs %>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row col-lg-6">
+        <h1>登陆</h1>
+
+        <form>
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" class="form-control" id="username" placeholder="请输入您的用户名">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" placeholder="您的用户密码">
+            </div>
+            <button type="button" id="denglu" class="btn btn-default">我要登陆</button>
+        </form>
+        
+        <div class="alert" role="alert" id="cuowukuang"></div>
+    </div>
+</div>
+</div>
+<!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/jquery-1.11.3.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    //当用户点击登录按钮后,进行相关的操作
+    $("#denglu").click(function (){
+        $.post("/dologin",{
+            //需要向前台提交的信息
+            "username":$("#username").val(),
+            "password":$("#password").val()
+        },function (result){
+            //这里面处理的是post请求给后台时,我们需要处理的逻辑
+            //result是需要后台给我们传递过来的
+            if(result == "1"){
+                //登录成功
+                $("#cuowukuang").addClass("alert-success");
+                $("#cuowukuang").fadeIn();
+                $("#cuowukuang").html("您已经注册成功,将自动跳转到首页");
+                //跳转到首页
+                window.location = "/";
+            }else if(result == "-1"){
+                //用户名被占用
+                $("#cuowukuang").addClass("alert-danger");
+                $("#cuowukuang").fadeIn();
+                $("#cuowukuang").html("用户名不存在");
+            }else if(result == "-2"){
+                //密码错误
+                $("#cuowukuang").addClass("alert-danger");
+                $("#cuowukuang").fadeIn();
+                $("#cuowukuang").html("密码不正确");
+            }else if(result == "-5"){
+                //服务器未知错误
+                //用户名被占用
+                //用户名被占用
+                $("#cuowukuang").addClass("alert-danger");
+                $("#cuowukuang").fadeIn();
+                $("#cuowukuang").html("服务器未知错误");
+            }
+        });
+    });
+</script>
+</body>
+</html>
